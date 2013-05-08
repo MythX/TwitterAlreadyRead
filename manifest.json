@@ -1,0 +1,14 @@
+{
+	"manifest_version": 2,
+	"name": "Twitter already read",
+	"version": "0.1",
+	"description": "",
+
+	"content_scripts": [
+		{
+			"matches": ["https://twitter.com/*"],
+			"js": ["content.js"],
+			"run_at": "document_end"
+		}
+	]
+}
