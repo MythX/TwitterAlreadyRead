@@ -37,6 +37,7 @@ function updateLastTweet() {
 				resetColorLastTweetSeen();
 				lastTweetSeen = lastTweet;
 				lastTweet = childrenNodes[i].getAttribute('data-item-id');
+				localStorage.setItem("last-tweet", lastTweet);
 				//console.log("lastTweet " + lastTweet);
 				//console.log("lastTweetSeen " + lastTweetSeen);
 				modifyStyleofLastTweetSeen(childrenNodes[i], '#FFFFFF');
