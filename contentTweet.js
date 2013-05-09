@@ -1,5 +1,5 @@
 var lastTweet = localStorage.getItem("last-tweet");
-var lastTweetSeen = localStorage.getItem("last-tweet");
+var lastTweetSeen = lastTweet;
 var styleModified = false;
 var childrenNodes;
 
@@ -14,14 +14,12 @@ setTimeout(function() {
 }, 6000);
 
 
+// Sauvegarde du dernier tweet vu avant la fermeture
 function handleUnload() {
-	console.log("Entre handleUnload");
 	childrenNodes = document.getElementById("stream-items-id").childNodes;
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
-			console.log("Update lastTweet");
 			localStorage.setItem("last-tweet", childrenNodes[i].getAttribute("data-item-id"));
-			console.log(localStorage.getItem("last-tweet"));
 			break;
 		}
 	}
@@ -34,13 +32,13 @@ function updateLastTweet() {
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
 			if(childrenNodes[i].getAttribute('data-item-id') != lastTweet) { // si le 1er tweet est différent
-				console.log("updateLastTweet");
-				console.log("lastTweet before " + lastTweet);
+				//console.log("updateLastTweet");
+				//console.log("lastTweet before " + lastTweet);
 				resetColorLastTweetSeen();
 				lastTweetSeen = lastTweet;
 				lastTweet = childrenNodes[i].getAttribute('data-item-id');
-				console.log("lastTweet " + lastTweet);
-				console.log("lastTweetSeen " + lastTweetSeen);
+				//console.log("lastTweet " + lastTweet);
+				//console.log("lastTweetSeen " + lastTweetSeen);
 				modifyStyleofLastTweetSeen(childrenNodes[i], '#FFFFFF');
 				styleModified = true;
 				break;
@@ -96,17 +94,17 @@ function modifyStyleofLastTweetSeen(lastTweet, color) {
 document.getElementById("stream-items-id").addEventListener("DOMNodeInserted", function(e) {
 
 	if(!styleModified) {
-		console.log(styleModified);
+		//console.log(styleModified);
 		if(childrenNodes[0].nodeName != "#text") {
 			if(childrenNodes[0].getAttribute('data-item-id') != lastTweet) {
-				console.log("lastTweet changed");
+				//console.log("lastTweet changed");
 				updateLastTweet();
 				updateLastTweetSeen();
 				styleModified = false;
 			}
 		} else if(childrenNodes[1].nodeName != "#text") {
 			if(childrenNodes[1].getAttribute('data-item-id') != lastTweet) {
-				console.log("lastTweet changed");	
+				//console.log("lastTweet changed");	
 				updateLastTweet();
 				updateLastTweetSeen();
 				styleModified = false;
