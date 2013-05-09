@@ -1,13 +1,15 @@
 {
 	"manifest_version": 2,
 	"name": "Twitter already read",
-	"version": "0.1",
+	"version": "0.2",
 	"description": "",
+
+	"options_page": "options.html",
 
 	"content_scripts": [
 		{
 			"matches": ["https://twitter.com/*"],
-			"js": ["contentTweet.js"],
+			"js": ["js/contentTweet.js", "js/jquery.js", "js/bootstrap-colorpicker.js", "js/options.js"],
 			"run_at": "document_end"
 		}
 	]
