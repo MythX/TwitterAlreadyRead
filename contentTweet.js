@@ -11,7 +11,7 @@ window.onbeforeunload = handleUnload;
 
 setTimeout(function() {
 	handleUnload();
-}, 6000);
+}, 2000);
 
 
 // Sauvegarde du dernier tweet vu avant la fermeture
@@ -96,7 +96,7 @@ document.getElementById("stream-items-id").addEventListener("DOMNodeInserted", f
 
 	if(!styleModified) {
 		//console.log(styleModified);
-		if(childrenNodes[0].nodeName != "#text") {
+		/*if(childrenNodes[0].nodeName != "#text") {
 			if(childrenNodes[0].getAttribute('data-item-id') != lastTweet) {
 				//console.log("lastTweet changed");
 				updateLastTweet();
@@ -110,6 +110,24 @@ document.getElementById("stream-items-id").addEventListener("DOMNodeInserted", f
 				updateLastTweetSeen();
 				styleModified = false;
 			}	
+		}*/
+
+		childrenNodes = childrenNodes = document.getElementById("stream-items-id").childNodes;
+		for(var i=0; i < childrenNodes.length; i++) {
+			if(childrenNodes[i].nodeName != "#text") {
+				if(childrenNodes[i].getAttribute('data-item-id') == lastTweet) {
+					break;
+				} else if(childrenNodes[i].getAttribute('data-item-id') == lastTweetSeen) {
+					updateLastTweetSeen();
+					break;
+				} else {
+					console.log("lastTweet changed");	
+					updateLastTweet();
+					updateLastTweetSeen();
+					styleModified = false;
+					break;
+				}
+			}
 		}
 	}
 }, false);
