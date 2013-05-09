@@ -7,7 +7,7 @@ var childrenNodes;
 window.onload = launch;
 
 // Lors de la fermeture de l'onglet
-window.onbeforeUnload = handleUnload;
+window.onbeforeunload = handleUnload;
 
 setTimeout(function() {
 	handleUnload();
