@@ -1,5 +1,5 @@
 var lastTweet = localStorage.getItem("last-tweet");
-var lastTweetSeen = lastTweet;
+var lastTweetSeen = localStorage.getItem("last-tweet");
 var styleModified = false;
 var childrenNodes;
 
@@ -9,13 +9,20 @@ window.onload = launch;
 // Lors de la fermeture de l'onglet
 window.onbeforeUnload = handleUnload;
 
+setTimeout(function() {
+	handleUnload();
+}, 6000);
+
+
 function handleUnload() {
 	console.log("Entre handleUnload");
-	childrenNodes = document.getElementById("stream-item-id").childNodes;
+	childrenNodes = document.getElementById("stream-items-id").childNodes;
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
 			console.log("Update lastTweet");
 			localStorage.setItem("last-tweet", childrenNodes[i].getAttribute("data-item-id"));
+			console.log(localStorage.getItem("last-tweet"));
+			break;
 		}
 	}
 	console.log("Fin handleUnload");
@@ -27,6 +34,8 @@ function updateLastTweet() {
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
 			if(childrenNodes[i].getAttribute('data-item-id') != lastTweet) { // si le 1er tweet est différent
+				console.log("updateLastTweet");
+				console.log("lastTweet before " + lastTweet);
 				resetColorLastTweetSeen();
 				lastTweetSeen = lastTweet;
 				lastTweet = childrenNodes[i].getAttribute('data-item-id');
@@ -75,7 +84,6 @@ function resetColorLastTweetSeen() {
 
 // Fonction executer au chargement
 function launch() {
-	updateLastTweet();
 	updateLastTweetSeen();
 }
 
