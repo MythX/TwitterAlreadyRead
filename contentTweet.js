@@ -23,7 +23,7 @@ function handleUnload() {
 			break;
 		}
 	}
-	console.log("Fin handleUnload");
+	//console.log("Fin handleUnload");
 }
 
 // Mise a jour du dernier tweet
