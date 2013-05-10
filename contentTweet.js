@@ -23,7 +23,6 @@ function handleUnload() {
 			break;
 		}
 	}
-	//console.log("Fin handleUnload");
 }
 
 // Mise a jour du dernier tweet
@@ -32,14 +31,10 @@ function updateLastTweet() {
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
 			if(childrenNodes[i].getAttribute('data-item-id') != lastTweet) { // si le 1er tweet est différent
-				//console.log("updateLastTweet");
-				//console.log("lastTweet before " + lastTweet);
 				resetColorLastTweetSeen();
 				lastTweetSeen = lastTweet;
 				lastTweet = childrenNodes[i].getAttribute('data-item-id');
 				localStorage.setItem("last-tweet", lastTweet);
-				//console.log("lastTweet " + lastTweet);
-				//console.log("lastTweetSeen " + lastTweetSeen);
 				modifyStyleofLastTweetSeen(childrenNodes[i], '#FFFFFF');
 				styleModified = true;
 				break;
@@ -95,23 +90,6 @@ function modifyStyleofLastTweetSeen(lastTweet, color) {
 document.getElementById("stream-items-id").addEventListener("DOMNodeInserted", function(e) {
 
 	if(!styleModified) {
-		//console.log(styleModified);
-		/*if(childrenNodes[0].nodeName != "#text") {
-			if(childrenNodes[0].getAttribute('data-item-id') != lastTweet) {
-				//console.log("lastTweet changed");
-				updateLastTweet();
-				updateLastTweetSeen();
-				styleModified = false;
-			}
-		} else if(childrenNodes[1].nodeName != "#text") {
-			if(childrenNodes[1].getAttribute('data-item-id') != lastTweet) {
-				//console.log("lastTweet changed");	
-				updateLastTweet();
-				updateLastTweetSeen();
-				styleModified = false;
-			}	
-		}*/
-
 		childrenNodes = childrenNodes = document.getElementById("stream-items-id").childNodes;
 		for(var i=0; i < childrenNodes.length; i++) {
 			if(childrenNodes[i].nodeName != "#text") {
