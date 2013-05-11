@@ -12,5 +12,9 @@
 			"js": ["js/contentTweet.js", "js/jquery.js", "js/bootstrap-colorpicker.js", "js/options.js"],
 			"run_at": "document_end"
 		}
-	]
+	],
+
+	"permissions": [
+    	"storage"
+  ]
 }

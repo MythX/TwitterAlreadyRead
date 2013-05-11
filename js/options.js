@@ -7,8 +7,10 @@ $(function(){
 function changeColor() {
 	var color = $('#cp1').val();
 	console.log("color :" + color);
-	localStorage.setItem("color-tweet", color);
-	console.log("color :" + localStorage.getItem("color-tweet"));
+	chrome.storage.sync.set({'color-tweet': color}, function() {
+    	// Notify that we saved.
+    	console.log('Settings saved');
+  	});
 }
 
 document.addEventListener('DOMContentLoaded', function () {

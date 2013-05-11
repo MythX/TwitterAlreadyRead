@@ -2,6 +2,13 @@ var lastTweet = localStorage.getItem("last-tweet");
 var lastTweetSeen = lastTweet;
 var styleModified = false;
 var childrenNodes;
+var colorTweet;
+
+chrome.storage.sync.get('color-tweet', function(result) {
+    // Notify that we saved.
+    colorTweet = result['color-tweet'];
+    console.log('Settings saved ' + colorTweet);
+ });
 
 // Lors du chargement de la page
 window.onload = launch;
@@ -53,7 +60,7 @@ function updateLastTweetSeen() {
 	for(var i=0; i < childrenNodes.length; i++) {
 		if(!(childrenNodes[i].nodeName == "#text")) {
 			if(childrenNodes[i].getAttribute('data-item-id') == lastTweetSeen) {
-				modifyStyleofLastTweetSeen(childrenNodes[i], '#CBE2EE');
+				modifyStyleofLastTweetSeen(childrenNodes[i], colorTweet);
 				break;
 			}
 		}
@@ -78,11 +85,14 @@ function resetColorLastTweetSeen() {
 
 // Fonction executer au chargement
 function launch() {
+
+
 	updateLastTweetSeen();
 }
 
 // Modification du background du Tweet
 function modifyStyleofLastTweetSeen(lastTweet, color) {
+	console.log("color " + color);
 	lastTweet.style.backgroundColor = color;
 }
 
